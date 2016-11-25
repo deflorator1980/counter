@@ -22,9 +22,12 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 public class GreetingControllerTest {
-
+/*
+   * Юнит-тестируем по очереди  все методы
+   *
+ */
     @Test
-    public void constr() throws IOException {
+    public void disp() throws IOException {
         GreetingController gc = new GreetingController();          // если файлик отсутствует, тоже работает
         RandomAccessFile raf = new RandomAccessFile("storage.txt", "r");
         raf.seek(0);

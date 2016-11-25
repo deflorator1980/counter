@@ -13,15 +13,18 @@ public class GreetingController {
 
 
     private static final String template = "Hello, %s!";
-    private AtomicLong counter = new AtomicLong();
+    private AtomicLong counter = null;
     private RandomAccessFile raf = null;
 
-
+    /*
+    * Данные счётчика берём из файлика.
+    * Если файла нет - создаёт и записываем в него нулевое значение
+    */
     public GreetingController() throws IOException {
         if (!new File("storage.txt").isFile()) {
-            raf = new RandomAccessFile("storage.txt", "rw");
-            raf.seek(0);
-            raf.writeLong(0l);
+            raf = new RandomAccessFile("storage.txt", "rw"); //доступ к файлу
+            raf.seek(0);                                     //позиция в файле
+            raf.writeLong(0l);                               // тут понятно :)
         } else {
             raf = new RandomAccessFile("storage.txt", "rw");
         }
