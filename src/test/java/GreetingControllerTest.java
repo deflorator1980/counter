@@ -22,20 +22,36 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 public class GreetingControllerTest {
-    @Test
-    public void disp() throws Exception {
-        System.out.println("hui");
-    }
 
     @Test
     public void constr() throws IOException {
+        GreetingController gc = new GreetingController();          // если файлик отсутствует, тоже работает
         RandomAccessFile raf = new RandomAccessFile("storage.txt", "r");
         raf.seek(0);
         long fromFile = raf.readLong();
-//        System.out.println(raf.readLong());
-        GreetingController gc = new GreetingController();
 
         assertEquals(new Greeting(fromFile, "Hello, a!"), gc.display("a"));
     }
+
+    @Test
+    public void increm() throws IOException {
+        GreetingController gc = new GreetingController();
+        RandomAccessFile raf = new RandomAccessFile("storage.txt", "r");
+        raf.seek(0);
+        long fromFile = raf.readLong();
+
+        assertEquals(new Greeting(fromFile + 1, "Hello, a!"), gc.increment("a"));
+    }
+
+    @Test
+    public void decrem() throws IOException {
+        GreetingController gc = new GreetingController();
+        RandomAccessFile raf = new RandomAccessFile("storage.txt", "r");
+        raf.seek(0);
+        long fromFile = raf.readLong();
+
+        assertEquals(new Greeting(fromFile - 1, "Hello, a!"), gc.decrement("a"));
+    }
+
 
 }
