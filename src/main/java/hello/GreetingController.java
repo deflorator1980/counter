@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GreetingController {
 
 
-    private static final String template = "Hello, %s!";
+    private static final String template = "Hello, %s!";  // Чисто приветственная надпись, чтобы не только цифры были
     private AtomicLong counter = null;
     private RandomAccessFile raf = null;
 
@@ -32,7 +32,7 @@ public class GreetingController {
         this.counter = new AtomicLong(raf.readLong());
     }
 
-    @RequestMapping(value = "/greeting", method = RequestMethod.POST)
+    @RequestMapping(value = "/greeting", method = RequestMethod.POST) // можно имя вводить, если потом аутентификацию добавлять в приложение - пригодиться
     public Greeting increment(@RequestParam(value = "name", defaultValue = "World") String name) throws IOException {
         Long count = counter.incrementAndGet();
         raf.seek(0);

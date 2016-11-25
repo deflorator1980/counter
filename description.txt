@@ -1,0 +1,8 @@
+Запуск "mvn spring-boot:run". Либо "mvn clean package && java -jar target/counter-0.1.0.jar"
+
+Чисто тесты "mvn clean test"
+
+Позырить результат из консоли:  curl -X POST  localhost:8080/greeting
+                                curl -X DELETE  localhost:8080/greeting
+                                curl localhost:8080/greeting
+
