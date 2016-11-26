@@ -13,7 +13,7 @@ public class GreetingController {
 
 
     private static final String template = "Hello, %s!";  // Чисто приветственная надпись, чтобы не только цифры были
-    private AtomicLong counter = null;
+    private final AtomicLong counter = new AtomicLong();
     private RandomAccessFile raf = null;
 
     /*
@@ -21,18 +21,19 @@ public class GreetingController {
     * Если файла нет - создаёт и записываем в него нулевое значение
     */
     public GreetingController() throws IOException {
-        if (!new File("storage.txt").isFile()) {
-            raf = new RandomAccessFile("storage.txt", "rw"); //доступ к файлу
+        if (!new File("storage").isFile()) {
+            raf = new RandomAccessFile("storage", "rw");        //доступ и создание  файла
             raf.seek(0);                                     //позиция в файле
             raf.writeLong(0l);                               // тут понятно :)
         } else {
-            raf = new RandomAccessFile("storage.txt", "rw");
+            raf = new RandomAccessFile("storage", "rw");    // просто доступ к файлу
         }
         raf.seek(0);
-        this.counter = new AtomicLong(raf.readLong());
+        counter.addAndGet(raf.readLong());
     }
 
-    @RequestMapping(value = "/greeting", method = RequestMethod.POST) // можно имя вводить, если потом аутентификацию добавлять в приложение - пригодиться
+    @RequestMapping(value = "/greeting", method = RequestMethod.POST)
+    // "name" - можно имя вводить, если потом аутентификацию добавлять в приложение - пригодиться
     public Greeting increment(@RequestParam(value = "name", defaultValue = "World") String name) throws IOException {
         Long count = counter.incrementAndGet();
         raf.seek(0);

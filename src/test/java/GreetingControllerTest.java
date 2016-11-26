@@ -29,7 +29,7 @@ public class GreetingControllerTest {
     @Test
     public void disp() throws IOException {
         GreetingController gc = new GreetingController();          // если файлик отсутствует, тоже работает
-        RandomAccessFile raf = new RandomAccessFile("storage.txt", "r");
+        RandomAccessFile raf = new RandomAccessFile("storage", "r");
         raf.seek(0);
         long fromFile = raf.readLong();
 
@@ -39,7 +39,7 @@ public class GreetingControllerTest {
     @Test
     public void increm() throws IOException {
         GreetingController gc = new GreetingController();
-        RandomAccessFile raf = new RandomAccessFile("storage.txt", "r");
+        RandomAccessFile raf = new RandomAccessFile("storage", "r");
         raf.seek(0);
         long fromFile = raf.readLong();
 
@@ -49,7 +49,7 @@ public class GreetingControllerTest {
     @Test
     public void decrem() throws IOException {
         GreetingController gc = new GreetingController();
-        RandomAccessFile raf = new RandomAccessFile("storage.txt", "r");
+        RandomAccessFile raf = new RandomAccessFile("storage", "r");
         raf.seek(0);
         long fromFile = raf.readLong();
 
